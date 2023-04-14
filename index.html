@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Josefin+Sans&family=Mouse+Memoirs&family=Roboto+Slab:wght@600&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Josefin Sans', sans-serif;
+        }
+        
+        .main {
+            width: 100%;
+            height: 100vh;
+            background-color: rgb(81, 81, 211);
+            position: relative;
+        }
+        
+        .center {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            text-transform: uppercase;
+            text-align: center;
+            color: rgb(226, 214, 43);
+            text-shadow: 2px 2px 4px rgb(110, 110, 95);
+            font-size: 2.1rem;
+            margin-bottom: 20px;
+            ;
+        }
+        
+        p {
+            text-align: center;
+        }
+        
+        textarea {
+            background-color: #444;
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            color: white;
+            border: 10px solid #34495e;
+            font-size: 1.3rem;
+        }
+        
+        #btn {
+            width: 100px;
+            height: 50px;
+            padding: 10px, 20px;
+            font-size: 1rem;
+            border-radius: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="center">
+            <h1>Welcome to typing speed</h1>
+            <h2 id="msg"></h2>
+            <br>
+            <textarea name="" id="mywords" cols="100" rows="10" placeholder="type and taste here"></textarea>
+            <br>
+            <button id="btn" class="mainbtn">Start</button>
+
+
+
+        </div>
+    </div>
+    <script>
+        let arr = [" Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus nesciunt esse assumenda iure enim sunt.",
+            "Vel corrupti autem incidunt dolorum nisi libero, dolore modi cum, beatae obcaecati dolores ullam qui culpa quisquam. Delectus obcaecati assumenda neque, nulla dicta dolores nesciunt",
+            "sapiente accusantium non voluptate et ab ad sit nisi ea vel autem molestias voluptatem debitis asperiores",
+            " odit harum inventore sed. Debitis, porro eaque. Optio debitis ratione neque, maiores iusto pariatur provident et alias facilis dolorum maxime, officia labore quae obcaecati",
+            " ea laboriosam cum sed quasi numquam aliquid repellendus modi praesentium dolorem.",
+            " Modi quidem nihil culpa iusto quibusdam qui, voluptatem, maiores nisi, voluptate laborum earum nobis! Earum, perspiciatis."
+        ];
+        let msg = document.getElementById("msg");
+        let typed = document.getElementById("mywords");
+        let btn = document.getElementById("btn");
+        let startTime, endTime;
+        let playGame = () => {
+            let date = new Date();
+            startTime = date.getTime();
+            let random = Math.floor(Math.random() * arr.length);
+            console.log(random);
+
+
+            let str = arr[random];
+            console.log(str);
+            msg.innerText = str;
+
+
+            btn.innerText = "Done";
+
+
+        }
+        let Wordcount = (str) => {
+            let arr1 = str.split(" ").length;
+            return arr1;
+
+
+
+        }
+        let compare = (str1, str2) => {
+            console.log("str1");
+            let w1 = srt1.split(" ");
+            let w2 = str2.split(" ");
+            let cnt = 0;
+            for (let i = 0; i < w1.length; i++) {
+                if (w1[i] == w2[i])
+                    cnt++;
+            }
+            let error = (w1.length - cnt);
+            return ("cnt " + "correct out of" + w1.length + "words and the total number of error are" + error + ".");
+
+
+        }
+        let endGame = () => {
+            let date = new Date();
+            endTime = date.getTime();
+            let diff = ((endTime - startTime) / 1000);
+            let total = typed.value;
+            console.log(total);
+            let count = Wordcount(total);
+            let speed = Math.round((count / diff) * 60);
+            console.log(speed);
+            let finalmsg = "your speed is" + speed + "words per minutes";
+            console.log(finalmsg);
+            let finalmsg1 = compare(msg.innerText, total);
+            console.log(finalmsg1);
+            msg.innerText = finalmsg;
+
+
+        }
+
+        btn.addEventListener('click', function() {
+            if (btn.innerText == 'Start') {
+                console.log("if");
+                typed.disabled = false;
+                playGame();
+
+
+            } else if (btn.innerText = 'Done') {
+                console.log("else");
+                typed.disabled = true;
+                endGame();
+
+            }
+        })
+    </script>
+
+</body>
+
+</html>
